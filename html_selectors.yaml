@@ -1,0 +1,19 @@
+# Button and input selectors for search functionality
+search_box: input[class="search-field"]
+submit_button: input[type="submit"]:not([disabled])
+close_button: button[class="close"]
+
+# CSS selectors for extracting book information
+book_title: h1[class="title product-field"]
+authors: a[class="contributor-name"]
+synopsis: div[class="synopsis-description"]
+category_rankings: ul[class="category-rankings"]
+ratings: ul.stars.read-only
+
+# Selectors for additional book details
+about_this_book: div[class="book-stats"] div[class="stat-desc"]
+was_price: span[class="price strikethrough"]
+main_content: div[item-info]
+book_details: div[class="bookitem-secondary-metadata"] ul li
+is_price: span[class="price"]
+img_url: img.cover-image.notranslate_alt.book-image
