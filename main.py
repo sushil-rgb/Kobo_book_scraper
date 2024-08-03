@@ -47,7 +47,7 @@ async def main():
     await isbn_automation(batches, delay, headless)
     # The script first automates the retrieval of dynamic URLs by searching for each ISBN provided. Once this process is complete and all URLs are gathered, it proceeds to scrape detailed content from the retrieved book URLs.
 
-    print("Finished processing dynamic URLs via ISBN search automation. Now initiating the scraping of book info.\n")
+    print("\nFinished processing dynamic URLs via ISBN search automation. Now initiating the scraping of book info.\n")
     await asyncio.sleep(2)  # Another brief pause before starting the next process
 
     # Perform the book info scraping automation
@@ -63,5 +63,5 @@ if __name__ == "__main__":
     execution_time = round(end_time - start_time, 2)  # Calculate the total execution time
 
     # Print the total time taken for the scraping process
-    print(f"Took {execution_time} seconds | {round(execution_time / 60, 2)} minutes.")
+    print(f"\nExecution time:\n---------------\n{execution_time} second/s.\n{round(execution_time / 60, 2)} minute/s.\n{round(execution_time / 3600, 2)} hour/s")
 

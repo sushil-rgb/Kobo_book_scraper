@@ -101,8 +101,7 @@ async def book_info(url, headless):
             try:
                 await (await page.query_selector(css_selector['close_button'])).click()
             except Exception as e:
-                logging.debug(f"No close button found: {str(e)}")
-                pass
+                logging.warning(f"No close button found: {str(e)}")
 
             # Explicitly wait for the ratings element to ensure it is loaded, as rendering can be slow at times
             await page.wait_for_selector(css_selector['ratings'], timeout = 15 * 10000)
@@ -115,6 +114,7 @@ async def book_info(url, headless):
 
             book_title = soup.select_one(css_selector['book_title']).text.strip()
             logging.info(f"Processing book: {book_title}")
+
             book_details = soup.select(css_selector['book_details'])
             about_this_book = soup.select(css_selector['about_this_book'])
 

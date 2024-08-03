@@ -26,12 +26,12 @@ import os
 
 
 # Setup logging for debugging purposes
-async def logging_debugging(name, level = logging.DEBUG):
+async def logging_debugging():
     logging.basicConfig(
-        level = level,
+        level = logging.DEBUG,
         format = "%(asctime)s - %(levelname)s - %(message)s",
         handlers = [
-            logging.FileHandler(f"{name}.log"),
+            logging.FileHandler(f"scraping.log"),
             logging.StreamHandler()
         ]
     )
@@ -95,7 +95,6 @@ async def load_selectors(selectors):
 
 # Concurrently scrape multiple URLs with batching and delay
 async def concurrent_scraping(url_lists, scraping_functions, batch_sizes, delay_between_batches, headless):
-    print(f"Initiating concurrent scraping: Crawling {batch_sizes} url per concurrency. Please wait...")
     dfs = []
     for idx in range(0, len(url_lists), batch_sizes):
         batch_urls = url_lists[idx:idx + batch_sizes]
