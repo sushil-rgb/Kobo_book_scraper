@@ -45,6 +45,7 @@ async def get_url_by_isbn(isbn, headless):
 
             # Find and click the search box to enter the ISBN
             await page.wait_for_selector(css_selector['search_box'], timeout= 3 * 10000)
+            # Select the first search box element on the page using the specified CSS selector
             search_box = page.locator(css_selector['search_box']).nth(0)
             await search_box.click()
             logging.info("Clicked on the search box.")
@@ -104,7 +105,7 @@ async def book_info(url, headless):
                 pass
 
             # Explicitly wait for the ratings element to ensure it is loaded, as rendering can be slow at times
-            await page.wait_for_selector(css_selector['ratings'], timeout = 10 * 10000)
+            await page.wait_for_selector(css_selector['ratings'], timeout = 15 * 10000)
 
             # Retrieve and parse the page content using BeautifulSoup
             page_content = await page.content()

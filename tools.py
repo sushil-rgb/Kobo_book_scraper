@@ -63,8 +63,8 @@ class TryExcept:
         return elements
 
 
-# Save extracted data into a CSV file
-async def export_sheet(directory_name, file_name, dicts):
+# Create a directory before extraction:
+async def make_dir(directory_name):
     # Create a directory before saving the spreadsheet if it doesn't exist
     path_directory = os.path.join(os.getcwd(), directory_name)
 
@@ -73,6 +73,9 @@ async def export_sheet(directory_name, file_name, dicts):
     else:
         os.mkdir(path_directory)
 
+
+# Save extracted data into a CSV file
+async def export_sheet(directory_name, file_name, dicts):
     df = pd.DataFrame(data = dicts)
     df.to_csv(f"{directory_name}//{file_name}.csv", index = False)
 

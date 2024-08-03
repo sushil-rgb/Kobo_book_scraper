@@ -8,21 +8,23 @@ The script defines two main asynchronous functions:
 Both functions utilize a concurrency module to manage multiple asynchronous scraping tasks, improving performance and efficiency.
 """
 
-from tools import concurrent_scraping, logging_debugging, export_sheet
+from tools import concurrent_scraping, logging_debugging, export_sheet, make_dir
 from scraper import get_url_by_isbn, book_info
 import pandas as pd
 
 
 async def isbn_automation(batches, delay, headless):
     # Read and process ISBNs from a CSV file to generate dynamic URLs.
-    isbn_lists = pd.read_csv("ISBN13_Kobo - ISBN13_Kobo.csv")['isbn13'].values.tolist()[:10]
-    batches = 10
-    delay = 2
-    dir_name = 'isbn13 dynamic urls'
-    file_name = 'isbn13 dynamic url datasets'
+    isbn_lists = pd.read_csv("ISBN13_Kobo - ISBN13_Kobo.csv")['isbn13'].values.tolist()
+
+    dir_name = 'dynamic url datasets'
+    file_name = 'isbn13 url datasets'
+
+    # Create a directory before extraction
+    await make_dir(dir_name)
 
     # Log the start of the scraping process.
-    await logging_debugging(f"{file_name}")
+    await logging_debugging(f"{dir_name}//{file_name}")
 
     # Perform concurrent scraping to get URLs by ISBN.
     results = await concurrent_scraping(isbn_lists, get_url_by_isbn, batches, delay, headless)
@@ -33,9 +35,15 @@ async def isbn_automation(batches, delay, headless):
 
 async def book_info_automation(batches, delay, headless):
     # Read and process URLs from an Excel file to retrieve book information.
-    book_urls = pd.read_excel("dynamic url datasets//isbn13 url datasets.xlsx")['url'].values.tolist()[:10]
+    book_urls = pd.read_excel("dynamic url datasets//isbn13 url datasets.xlsx")['url'].values.tolist()
     dir_name = 'isbn13 datasets'
     file_name = 'isbn13 book datasets'
+
+    # Create a directory before extraction
+    await make_dir(dir_name)
+
+    # Log the start of the scraping process.
+    await logging_debugging(f"{dir_name}//{file_name}")
 
     # Log the start of the scraping process.
     await logging_debugging(f"{file_name}")
