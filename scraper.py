@@ -33,7 +33,7 @@ async def get_url_by_isbn(isbn, headless):
 
         try:
             logging.info(f"Navigating to Kobo page for ISBN: {str(isbn)}")
-            await page.goto("https://www.kobo.com/us/en", wait_until = "domcontentloaded", timeout = 30 * 10000)
+            await page.goto("https://www.kobo.com/us/en", wait_until = "domcontentloaded", timeout = 120 * 10000)
 
             # Attempt to close any pop-up that might appear
             try:
@@ -44,7 +44,7 @@ async def get_url_by_isbn(isbn, headless):
                 logging.warning("Close button not found or click failed:", e)
 
             # Find and click the search box to enter the ISBN
-            await page.wait_for_selector(css_selector['search_box'], timeout= 3 * 10000)
+            await page.wait_for_selector(css_selector['search_box'], timeout= 60 * 10000)
             # Select the first search box element on the page using the specified CSS selector
             search_box = page.locator(css_selector['search_box']).nth(0)
             await search_box.click()
@@ -95,7 +95,7 @@ async def book_info(url, headless):
         page = await context.new_page()
 
         try:
-            await page.goto(url, wait_until = 'domcontentloaded', timeout = 60 * 10000)
+            await page.goto(url, wait_until = 'domcontentloaded', timeout = 120 * 10000)
 
             # Attempt to close any pop-up that might appear
             try:

@@ -35,7 +35,7 @@ async def isbn_automation(batches, delay, headless):
 
 async def book_info_automation(batches, delay, headless):
     # Read and process URLs from an Excel file to retrieve book information.
-    book_urls = pd.read_excel("dynamic url datasets//isbn13 url datasets.xlsx")['url'].values.tolist()
+    book_urls = pd.read_excel("dynamic url datasets//isbn13 url datasets.csv")['url'].values.tolist()
     dir_name = 'isbn13 datasets'
     file_name = 'isbn13 book datasets'
 

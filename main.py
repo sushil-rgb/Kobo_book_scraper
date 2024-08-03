@@ -36,7 +36,7 @@ import time
 
 async def main():
     # Configuration for the scraping tasks
-    batches = 10  # Number of requests to process concurrently in a batch.
+    batches = 10 # Number of requests to process concurrently in a batch.
     delay = 2  # Delay between each batch of requests.
     headless = True  # Run the browser in headless mode (without GUI).
 
