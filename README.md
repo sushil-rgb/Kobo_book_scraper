@@ -1,4 +1,4 @@
-# Rakuted KOBO Scraper
+# Rakuten KOBO Scraper
 
 ## Overview
 
